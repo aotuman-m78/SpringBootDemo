@@ -7,6 +7,8 @@ import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.CharsetUtil;
+import io.netty.util.internal.logging.InternalLogger;
+import io.netty.util.internal.logging.InternalLoggerFactory;
 
 /**
  * Created by fangrui on 2018/4/8.
@@ -14,10 +16,12 @@ import io.netty.util.CharsetUtil;
 @ChannelHandler.Sharable
 public class EchoServerHandler extends ChannelInboundHandlerAdapter {
 
+    private static final InternalLogger log = InternalLoggerFactory.getInstance(EchoServerHandler.class);
+
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         ByteBuf in = (ByteBuf) msg;
-        System.out.println("Server received : " + in.toString(CharsetUtil.UTF_8));
+        log.info("Server received : " + in.toString(CharsetUtil.UTF_8));
     }
 
     @Override
